@@ -8,9 +8,13 @@ typedef NS_ENUM(NSInteger, PMKCatchPolicy) {
     PMKCatchPolicyAllErrorsExceptCancellation
 } NS_SWIFT_NAME(CatchPolicy);
 
+#ifndef BUCK
+    #if __has_include("PromiseKit-Swift.h")
+        #define USE_SWIFT_HEADER
+    #endif
+#endif
 
-#if __has_include("PromiseKit-Swift.h")
-
+#ifdef USE_SWIFT_HEADER
     // we define this because PromiseKit-Swift.h imports
     // PromiseKit.h which then expects this header already
     // to have been fully imported… !
